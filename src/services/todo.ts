@@ -19,12 +19,17 @@ const getTodoByCategoryINPROGRESS = async () => {
   const todoRetrieved = await todoRepository.getTodoByCategoryINPROGRESS();
   return todoRetrieved
 }
+const updateTodoById = async (todoId: string) => {
+  const createdTodo = await todoRepository.updateTodoById(todoId);
+  return createdTodo;
+};
 
 const services = {
   getTodos,
   createTodo,
   getTodoByCategoryTODO,
-  getTodoByCategoryINPROGRESS
+  getTodoByCategoryINPROGRESS,
+  updateTodoById
 };
 
 export default services;

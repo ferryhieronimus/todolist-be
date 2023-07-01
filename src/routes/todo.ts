@@ -8,6 +8,7 @@ router.get("/:todoId?", todoController.getTodos);
 router.post("/", todoController.createTodo);
 router.get("/cat/todo", todoController.getTodosByCategoryTODO);
 router.get("/cat/progress", todoController.getTodosByCategoryINPROGRESS);
+router.put("/:todoId", todoController.updateTodo);
 
 
 export default router;

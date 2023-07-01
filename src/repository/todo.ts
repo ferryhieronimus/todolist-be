@@ -42,13 +42,24 @@ const getTodoByCategoryINPROGRESS = async () => {
   });
 
   return todos;
+}
+const updateTodoById = async (todoId: string) => {
+
+  const todo = await prisma.todo.findUniqueOrThrow({
+    where: { id: todoId },
+  });
+
+  const updatedTodo = { ...todo, isDone: !todo.isDone };
+
+  return updatedTodo;
 };
 
 const repository = {
   getTodos,
   createTodo,
   getTodoByCategoryTODO,
-  getTodoByCategoryINPROGRESS
+  getTodoByCategoryINPROGRESS,
+  updateTodoById
 };
 
 export default repository;

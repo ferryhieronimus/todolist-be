@@ -60,12 +60,30 @@ const createTodo: RequestHandler = async (req, res) => {
   });
 };
 
+const updateTodo: RequestHandler = async (req, res) => {
+  const { articleId } = req.params;
+
+  const updatedNote = await todoService.updateTodoById(
+    articleId,
+  );
+
+  res.status(200).send({
+    status: "success",
+    message: "Todo updated successfully",
+    data: {
+      updatedNote,
+    },
+  });
+};
+
+
 const controllers = {
   helloWorld,
   getTodos,
   createTodo,
   getTodosByCategoryINPROGRESS,
   getTodosByCategoryTODO,
+  updateTodo
 };
 
 export default controllers;
