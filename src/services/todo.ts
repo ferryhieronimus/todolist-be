@@ -10,9 +10,21 @@ const createTodo = async (data: CreateTodoParams) => {
   return createdTodo;
 };
 
+const getTodoByCategoryTODO = async () => {
+  const todoRetrieved = await todoRepository.getTodoByCategoryTODO();
+  return todoRetrieved
+}
+
+const getTodoByCategoryINPROGRESS = async () => {
+  const todoRetrieved = await todoRepository.getTodoByCategoryINPROGRESS();
+  return todoRetrieved
+}
+
 const services = {
   getTodos,
-  createTodo
+  createTodo,
+  getTodoByCategoryTODO,
+  getTodoByCategoryINPROGRESS
 };
 
 export default services;
