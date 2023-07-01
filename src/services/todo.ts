@@ -10,9 +10,15 @@ const createTodo = async (data: CreateTodoParams) => {
   return createdTodo;
 };
 
+const updateTodoById = async (todoId: string) => {
+  const createdTodo = await todoRepository.updateTodoById(todoId);
+  return createdTodo;
+};
+
 const services = {
   getTodos,
-  createTodo
+  createTodo,
+  updateTodoById
 };
 
 export default services;
