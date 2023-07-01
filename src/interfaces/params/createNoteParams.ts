@@ -1,0 +1,3 @@
+interface CreateNoteParams {
+  content: string;
+}

@@ -7,30 +7,22 @@ const createTodo = async (data: CreateTodoParams) => {
     data: {
       title,
       content,
-      category
-    }
+      category,
+    },
   });
 
   return { createdTodo };
 };
 
 const getTodos = async (todoId: string) => {
-  
   if (todoId) {
     await prisma.todo.findUniqueOrThrow({
       where: { id: todoId },
     });
   }
-  
+
   const todos = await prisma.todo.findMany({
     where: todoId ? { id: todoId } : {},
-    select: {
-      id: true,
-      title: true,
-      content: true,
-      createdAt: true,
-      updatedAt: true,
-    },
   });
 
   return todos;
@@ -38,7 +30,7 @@ const getTodos = async (todoId: string) => {
 
 const repository = {
   getTodos,
-  createTodo
+  createTodo,
 };
 
 export default repository;

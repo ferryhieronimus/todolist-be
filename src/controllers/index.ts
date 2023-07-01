@@ -1,3 +1,4 @@
 import todoController from "./todo";
+import noteController from "./note";
 
-export { todoController };
+export { todoController , noteController};
