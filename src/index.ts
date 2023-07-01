@@ -4,12 +4,14 @@ import dotenv from "dotenv";
 import morgan from "morgan";
 import middlewares from "./middlewares";
 import router from "./routes";
+import cors from "cors"
 
 const app: Express = express();
 
 dotenv.config();
 
 app.use(express.json());
+app.use(cors());
 app.use(morgan("tiny"));
 
 app.use("/api/v1", router);

@@ -3,6 +3,6 @@ import todoRouter from "./todo";
 
 const router: Router = express.Router();
 
-router.use("/", todoRouter);
+router.use("/todo", todoRouter);
 
 export default router;
