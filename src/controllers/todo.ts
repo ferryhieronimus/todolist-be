@@ -22,8 +22,31 @@ const getTodos: RequestHandler = async (req, res) => {
   });
 };
 
-const createTodo: RequestHandler = async (req, res) => {
+const getTodosByCategoryTODO: RequestHandler = async (req, res) => {
+  const todo = await todoService.getTodoByCategoryTODO();
 
+  res.status(200).send({
+    status: "success",
+    message: "To-dos retrieved successfully",
+    data: {
+      todos: todo,
+    },
+  });
+};
+
+const getTodosByCategoryINPROGRESS: RequestHandler = async (req, res) => {
+  const todo = await todoService.getTodoByCategoryINPROGRESS();
+
+  res.status(200).send({
+    status: "success",
+    message: "To-dos retrieved successfully",
+    data: {
+      todos: todo,
+    },
+  });
+};
+
+const createTodo: RequestHandler = async (req, res) => {
   const data: CreateTodoParams = req.body;
 
   const todo = await todoService.createTodo(data);
@@ -58,6 +81,8 @@ const controllers = {
   helloWorld,
   getTodos,
   createTodo,
+  getTodosByCategoryINPROGRESS,
+  getTodosByCategoryTODO,
   updateTodo
 };
 

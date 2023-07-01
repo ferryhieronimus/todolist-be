@@ -28,6 +28,21 @@ const getTodos = async (todoId: string) => {
   return todos;
 };
 
+const getTodoByCategoryTODO = async () => {
+  let todos = await prisma.todo.findMany({
+    where: { category: "TODO" },
+  });
+
+  return todos;
+};
+
+const getTodoByCategoryINPROGRESS = async () => {
+  let todos = await prisma.todo.findMany({
+    where: { category: "INPROGRESS" },
+  });
+
+  return todos;
+}
 const updateTodoById = async (todoId: string) => {
 
   const todo = await prisma.todo.findUniqueOrThrow({
@@ -42,6 +57,8 @@ const updateTodoById = async (todoId: string) => {
 const repository = {
   getTodos,
   createTodo,
+  getTodoByCategoryTODO,
+  getTodoByCategoryINPROGRESS,
   updateTodoById
 };
 
