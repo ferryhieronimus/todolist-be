@@ -3,6 +3,8 @@ import { todoController } from "../controllers";
 
 const router: Router = express.Router();
 
-router.get("/", todoController.helloWorld);
+router.get("/hello", todoController.helloWorld);
+router.get("/:todoId?", todoController.getTodos);
+router.post("/", todoController.createTodo);
 
 export default router;
