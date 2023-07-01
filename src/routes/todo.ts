@@ -6,5 +6,7 @@ const router: Router = express.Router();
 router.get("/hello", todoController.helloWorld);
 router.get("/:todoId?", todoController.getTodos);
 router.post("/", todoController.createTodo);
+router.put("/:todoId", todoController.updateTodo);
+
 
 export default router;
