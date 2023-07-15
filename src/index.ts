@@ -18,6 +18,7 @@ app.set("view engine", "ejs");
 app.use(express.json());
 app.use(cors());
 app.use(morgan("tiny"));
+
 app.use(
   session({
     resave: false,
@@ -25,8 +26,6 @@ app.use(
     secret: "SECRET",
   })
 );
-
-app.use("/api/v1", router);
 
 app.get("/", function (req, res) {
   res.render("pages/auth");
@@ -47,17 +46,6 @@ app.use(passport.session());
 
 app.set("view engine", "ejs");
 
-app.get("/success", (req, res) => res.send(userProfile));
-app.get("/error", (req, res) => res.send("error logging in"));
-
-passport.serializeUser((user: any, done: any) => {
-  done(null, user);
-});
-
-passport.deserializeUser((obj: any, done: any) => {
-  done(null, obj);
-});
-
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || "Not Found";
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET || "Not Found";
 
@@ -66,7 +54,7 @@ passport.use(
     {
       clientID: GOOGLE_CLIENT_ID,
       clientSecret: GOOGLE_CLIENT_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/callback",
+      callbackURL: "http://localhost:3000/api/v1/auth/google/callback",
     },
     function (
       accessToken: string,
@@ -79,20 +67,15 @@ passport.use(
     }
   )
 );
+passport.serializeUser((user: any, done: any) => {
+  done(null, user);
+});
 
-app.get(
-  "/auth/google",
-  passport.authenticate("google", { scope: ["profile", "email"] })
-);
+passport.deserializeUser((obj: any, done: any) => {
+  done(null, obj);
+});
 
-app.get(
-  "/auth/google/callback",
-  passport.authenticate("google", { failureRedirect: "/error" }),
-  function (req, res) {
-    // Successful authentication, redirect success.
-    res.redirect("/success");
-  }
-);
+app.use("/api/v1", router);
 
 app.use(middlewares.errorHandler);
 app.use(middlewares.unknownEndpoint);
